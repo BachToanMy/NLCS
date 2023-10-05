@@ -36,68 +36,61 @@ public class logincontroller{
     @FXML private Label usernamelabel;
     @FXML private Label passwordlabel;
     @FXML private Button signupbutton;
-    private Stage stage;
-    private Scene scene;
-    private Parent root;
-    database db = new database();
-    Connection con = db.getConnection();
 
+    private database db = new database();
+    private Connection con = db.getConnection();
+    private Alert alert;
     ResultSet rs;
+
     public void Login(ActionEvent event){
-        try {
-            PreparedStatement pst = con.prepareStatement("select * from account where Username=? and Password=?");
-            String uname = usernamefield.getText();
-            String pass = passwordfield.getText();
-            pst.setString(1,uname);
-            pst.setString(2,pass);
 
-            rs = pst.executeQuery();
+        if(usernamefield.getText().isEmpty() || passwordfield.getText().isEmpty()){
+            alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Message");
+            alert.setHeaderText(null);
+            alert.setContentText("Incorrect Username or Password");
+            alert.show();
+        } else{
+            try {
+                PreparedStatement pst = con.prepareStatement("select * from account where Username=? and Password=?");
+                String uname = usernamefield.getText();
+                String pass = passwordfield.getText();
+                pst.setString(1,uname);
+                pst.setString(2,pass);
 
-            if(rs.next()){
-                System.out.println("Login successfully");
-                root = FXMLLoader.load(getClass().getResource("dashboard.fxml"));
-                stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-                Scene scene = new Scene(root);
-                stage.setScene(scene);
-                stage.show();
+                rs = pst.executeQuery();
+
+                if(rs.next()){
+                    //TO GET THE USERNAME THAT USER USED
+                    data.username = usernamefield.getText();
+                    alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Information Message");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Login Successfully");
+                    alert.showAndWait();
+                    Parent root = FXMLLoader.load(getClass().getResource("dashboard.fxml"));
+                    Stage stage = new Stage();
+                    Scene scene = new Scene(root);
+                    stage.setTitle("Welcome to myComestic");
+                    stage.setScene(scene);
+                    stage.show();
+                    signinbutton.getScene().getWindow().hide();
+                }
+                else {
+                    alert=new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error Message");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Incorrect Username or Password");
+                    alert.showAndWait();
+                    usernamefield.setText("");
+                    passwordfield.setText("");
+                }
+
+            } catch (SQLException | IOException e) {
+                throw new RuntimeException(e);
             }
-            else {
-                usernamefield.setText("");
-                passwordfield.setText("");
-            }
-
-        } catch (SQLException | IOException e) {
-            throw new RuntimeException(e);
         }
 
     }
 
-//    public void actionsignin(){
-//        Window owner = usernamefield.getScene().getWindow();
-//        System.out.println(usernamefield.getText());
-//        System.out.println(passwordfield.getText());
-//
-//        if(usernamefield.getText().isEmpty()){
-//            showAlert(Alert.AlertType.ERROR,owner,"Please enter a valid username","Error");
-//
-//        }
-//
-//    }
-//    public static void infobox(String informessage,String header,String title){
-//        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-//        alert.setContentText(informessage);
-//        alert.setTitle(title);
-//        alert.setHeaderText(header);
-//        alert.showAndWait();
-//
-//    }
-//
-//    public static void showAlert(Alert.AlertType alertType, Window owner,String message,String title){
-//        Alert alert = new Alert(alertType);
-//        alert.setContentText(message);
-//        alert.setTitle(title);
-//        alert.setHeaderText(null);
-//        alert.initOwner(owner);
-//        alert.show();
-//    }
 }

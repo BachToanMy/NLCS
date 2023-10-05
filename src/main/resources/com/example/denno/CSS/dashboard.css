@@ -1,0 +1,91 @@
+.nav{
+    -fx-background-color:linear-gradient(to bottom right, #4e99bd, #335b88) ;
+}
+
+.nav-btn{
+    -fx-background-color: transparent ;
+    -fx-border-color: #fff;
+    -fx-border-width: .7px;
+    -fx-font-size: 14px;
+    -fx-border-radius: 5px;
+    -fx-font-family: Arial ;
+    -fx-text-fill: #fff;
+    -fx-alignment: left;
+}
+
+.nav-btn:hover{
+    -fx-background-color: #fff;
+    -fx-text-fill: #2a5178;
+}
+
+.header{
+    -fx-background-color: #156083;
+    -fx-border-width: 0 0 2px 0;
+    -fx-border-color: #fff;
+}
+
+.shadow{
+    -fx-effect:dropshadow(three-pass-box,rgba(0,0,0,0.5),5,0,0,0) ;
+}
+
+.signout{
+    -fx-background-color: transparent ;
+    -fx-background-radius: 50px;
+    -fx-border-color: #1cacee;
+    -fx-border-width: .7px;
+    -fx-border-radius: 50px;
+    -fx-padding: 5px;
+}
+
+.signout{
+    -fx-background-color: #fff;
+}
+
+.white-bg{
+    -fx-background-color: #fff;
+}
+
+.radius{
+    -fx-background-radius: 8px;
+}
+
+.transparent{
+    -fx-background-color: transparent;
+}
+
+.form {
+    -fx-background-color:linear-gradient(to bottom right, #4f6944, #2d6231) ;
+}
+
+.nav-form{
+    -fx-background-color: linear-gradient(to bottom right, #4f6944, #2d6231) ;
+}
+.table-view{
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+    -fx-border-color: linear-gradient(to bottom right, #4f6944, #2d6231);
+    -fx-border-radius: 5px;
+    -fx-border-width: 1.5px ;
+}
+.table-view .column-header-background{
+    -fx-background-color:linear-gradient(to bottom right, #4f6944, #2d6231) ;
+    -fx-background-radius: 5px 5px 0 0 ;
+    -fx-background-insets: 0 0 0 0;
+}
+.table-view .column-header, .filter{
+    -fx-background-color: transparent;
+    -fx-size:40px ;
+}
+.table-view .column-header .label{
+    -fx-text-fill: #fff;
+}
+.btn {
+    -fx-background-color: linear-gradient(to bottom right, #4f6944, #2d6231) ;
+    -fx-cursor: hand;
+    -fx-text-fill: #fff;
+    -fx-font-size: 14px;
+}
+.btn:hover{
+    -fx-background-color: linear-gradient(to bottom right, #d9e3d3, #b0ccb4) ;
+    -fx-text-fill: black;
+}
